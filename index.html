@@ -3,250 +3,949 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arte de Aprender | Profª Mariana Lins</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Studio Play - Robótica Educacional com Arduino</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Variáveis de Cores e Fontes baseadas na paleta e estilo solicitados */
         :root {
-            --bg-body: #f8faff;
-            --primary: #6c5ce7; 
-            --secondary: #00cec9; 
-            --accent: #ff7675; 
+            --primary-dark: #0b1838;
+            --primary-purple: #4d4177;
+            --primary-blue: #3a60a0;
+            --secondary-blue: #88a5e0;
+            --light-blue: #c8ddf5;
             --white: #ffffff;
-            --text-dark: #2d3436;
-            --text-gray: #636e72;
-            --glass: rgba(255, 255, 255, 0.9);
-            --shadow: 0 20px 40px rgba(108, 92, 231, 0.08);
+            --bg-light: #f9faff; /* Fundo predominantemente branco */
+            --text-color: #0b1838;
+            --text-light: #636e72;
+            --gradient-primary: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            --gradient-hover: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
-        body { background-color: var(--bg-body); color: var(--text-dark); overflow-x: hidden; line-height: 1.6; }
-
-        /* --- DECORAÇÃO --- */
-        .blob {
-            position: absolute; width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(108, 92, 231, 0.07) 0%, transparent 70%);
-            z-index: -1; top: -100px; right: -100px;
+        /* Reset e Estilos Globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        /* --- HEADER --- */
-        header {
-            position: fixed; width: 100%; padding: 15px 8%;
-            display: flex; justify-content: space-between; align-items: center;
-            background: var(--glass); backdrop-filter: blur(15px);
-            z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05);
+        body {
+            font-family: var(--font-body);
+            background-color: var(--white);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
-        .logo { font-weight: 700; font-size: 1.4rem; color: var(--primary); text-transform: uppercase; }
-        nav ul { display: flex; list-style: none; gap: 15px; }
-        nav ul li a { text-decoration: none; color: var(--text-dark); font-size: 0.8rem; font-weight: 600; transition: 0.3s; }
-        nav ul li a:hover { color: var(--primary); }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        /* Botões */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(58, 96, 160, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--gradient-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(58, 96, 160, 0.4);
+        }
+
+        /* Cabeçalho (Header) */
+        .header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+        }
         
-        .btn-whatsapp {
-            background: #25d366; color: white; padding: 10px 20px;
-            border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.8rem;
-            display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        .logo i {
+            margin-right: 8px;
+            font-size: 2rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        /* --- SEÇÕES --- */
-        section { padding: 90px 8%; position: relative; }
-        .section-title { text-align: center; margin-bottom: 50px; font-size: 2.2rem; font-weight: 700; }
-        .section-title span { color: var(--primary); }
-
-        /* --- HERO --- */
-        .hero { display: flex; align-items: center; justify-content: space-between; padding-top: 160px; gap: 40px; }
-        .hero-text h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 25px; }
-        .hero-img { 
-            flex: 1; background: var(--white); padding: 12px; border-radius: 40px; 
-            box-shadow: var(--shadow); transform: perspective(1000px) rotateY(-8deg);
+        .nav-menu {
+            display: flex;
+            align-items: center;
         }
-        .hero-img img { width: 100%; border-radius: 30px; display: block; }
 
-        /* --- SOBRE PROJETO / MIM --- */
-        .projeto-box { background: var(--white); padding: 40px; border-radius: 30px; box-shadow: var(--shadow); margin-bottom: 30px; }
-        .curriculo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        .cv-item { margin-bottom: 15px; padding-left: 15px; border-left: 3px solid var(--primary); }
-        .cv-item h4 { color: var(--primary); font-size: 1rem; }
-
-        /* --- DISCIPLINAS --- */
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
-        .materia-card {
-            background: var(--white); padding: 40px 25px; border-radius: 25px;
-            text-align: center; transition: 0.4s; box-shadow: var(--shadow);
+        .nav-item {
+            margin-left: 30px;
         }
-        .materia-card:hover { transform: translateY(-10px); background: var(--primary); color: white; }
-        .icon-circle { width: 70px; height: 70px; background: #f0edff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 1.8rem; }
 
-        /* --- VALORES --- */
-        .plano-card {
-            background: var(--white); padding: 35px; border-radius: 25px; text-align: center;
-            box-shadow: var(--shadow); border: 1px solid #eee;
+        .nav-link {
+            font-weight: 500;
+            color: var(--primary-dark);
+            position: relative;
         }
-        .price { font-size: 2.2rem; font-weight: 700; color: var(--primary); margin: 15px 0; }
-        .destaque { border: 2px solid var(--primary); transform: scale(1.05); }
 
-        /* --- FUNCIONAMENTO --- */
-        .func-box { background: #eef2ff; padding: 40px; border-radius: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-
-        /* --- DEPOIMENTOS --- */
-        .depoimento-card {
-            background: #fff; padding: 30px; border-radius: 20px; font-style: italic;
-            box-shadow: var(--shadow); border: 1px dashed var(--primary);
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
         }
-        .autor { margin-top: 15px; font-weight: 700; color: var(--primary); font-style: normal; display: block; }
 
-        /* --- FOOTER --- */
-        footer { background: var(--white); padding: 50px 8%; text-align: center; border-top: 1px solid #eee; }
+        .nav-link:hover::after {
+            width: 100%;
+        }
 
-        @media (max-width: 850px) {
-            .hero, .curriculo-grid, .func-box { grid-template-columns: 1fr; flex-direction: column; text-align: center; }
-            .hero-text h1 { font-size: 2.5rem; }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            transition: all 0.3s ease-in-out;
+            background-color: var(--primary-dark);
+        }
+
+        /* Seção Hero */
+        .hero {
+            padding-top: 140px;
+            padding-bottom: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg-shape {
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 50%;
+            height: 100%;
+            background: radial-gradient(circle, var(--light-blue) 0%, rgba(255,255,255,0) 70%);
+            opacity: 0.6;
+            z-index: -1;
+            border-radius: 50% 0 0 50%;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding-right: 50px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-title span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-image img {
+            border-radius: 20px;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Seção de Benefícios */
+        .features {
+            background-color: var(--bg-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--light-blue);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--white);
+            box-shadow: 0 5px 15px rgba(77, 65, 119, 0.3);
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-text {
+            color: var(--text-light);
+        }
+
+        /* Seção de Robótica com Arduino */
+        .robotics {
+            position: relative;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .robotics-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .robotics-image {
+            flex: 1;
+        }
+        
+        .robotics-image img {
+            border-radius: 20px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .robotics-details {
+            flex: 1;
+        }
+
+        .robotics-list {
+            margin-top: 30px;
+        }
+
+        .robotics-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .robotics-item-icon {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 20px;
+        }
+
+        .robotics-item-title {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .robotics-item-text {
+            color: var(--text-light);
+        }
+
+        /* Seção de Projetos */
+        .projects {
+            background-color: var(--bg-light);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            cursor: pointer;
+        }
+        
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(11, 24, 56, 0.9), transparent);
+            color: var(--white);
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            transform: translateY(0);
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--white);
+        }
+
+        .project-category {
+            font-size: 1rem;
+            color: var(--secondary-blue);
+        }
+        
+        /* Seção de Estatísticas */
+        .stats {
+            background: var(--gradient-primary);
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .stat-item {
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-family: var(--font-heading);
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--light-blue);
+        }
+
+        /* Seção de Depoimentos */
+        .testimonials {
+            background-color: var(--bg-light);
+            position: relative;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--light-blue);
+            position: relative;
+        }
+        
+        .testimonial-quote {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            font-style: italic;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-quote::before {
+            content: '\201C';
+            font-size: 5rem;
+            color: var(--light-blue);
+            position: absolute;
+            top: -40px;
+            left: -20px;
+            opacity: 0.5;
+            z-index: -1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+            border: 3px solid var(--primary-blue);
+        }
+        
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Rodapé (Footer) */
+        .footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 80px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-logo i {
+            margin-right: 8px;
+            color: var(--secondary-blue);
+        }
+
+        .footer-desc {
+            color: var(--light-blue);
+            margin-bottom: 25px;
+        }
+
+        .social-links {
+            display: flex;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--gradient-primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-heading {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: var(--white);
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--light-blue);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-blue);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light-blue);
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text {
+                padding-right: 0;
+                margin-bottom: 50px;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .robotics-content {
+                flex-direction: column;
+            }
+            
+            .robotics-image {
+                order: -1;
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: var(--white);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+                padding: 20px 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-item {
+                margin: 20px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+            
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                padding: 12px 28px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="blob"></div>
-
-    <header>
-        <div class="logo">Arte de Aprender</div>
-        <nav>
-            <ul>
-                <li><a href="#projeto">Projeto</a></li>
-                <li><a href="#sobre-mim">Sobre Mim</a></li>
-                <li><a href="#disciplinas">Disciplinas</a></li>
-                <li><a href="#valores">Valores</a></li>
-                <li><a href="#depoimentos">Depoimentos</a></li>
-            </ul>
-        </nav>
-        <a href="https://wa.me/5511999999999" target="_blank" class="btn-whatsapp">WhatsApp</a>
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-robot"></i>
+                    Studio Play
+                </a>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="#home" class="nav-link">Início</a></li>
+                    <li class="nav-item"><a href="#beneficios" class="nav-link">Benefícios</a></li>
+                    <li class="nav-item"><a href="#robotica" class="nav-link">Robótica Arduino</a></li>
+                    <li class="nav-item"><a href="#projetos" class="nav-link">Projetos</a></li>
+                    <li class="nav-item"><a href="#depoimentos" class="nav-link">Depoimentos</a></li>
+                    <li class="nav-item"><a href="#contato" class="btn btn-primary" style="margin-left: 20px;">Matricule-se</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
     </header>
 
-    <section class="hero">
-        <div class="hero-text">
-            <h1>Aprender é uma <span style="color: var(--primary);">Arte</span>.</h1>
-            <p>Apoio pedagógico especializado em Matemática, Física e Ciências. Transformamos o medo das exatas em confiança e resultados.</p>
-            <a href="#valores" class="btn-whatsapp" style="background: var(--primary); display: inline-flex; width: fit-content;">Ver Planos de Aula</a>
-        </div>
-        <div class="hero-img">
-            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80" alt="Estudante">
-        </div>
-    </section>
-
-    <section id="projeto">
-        <div class="projeto-box">
-            <h2 class="section-title">O <span>Projeto</span></h2>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto;">O projeto "Arte de Aprender" foca no ensino tradicional revisitado: clareza, paciência e personalização. Aqui, cada dificuldade é tratada como um degrau para o próximo nível de conhecimento.</p>
-        </div>
-    </section>
-
-    <section id="sobre-mim" style="background: #f1f4fb;">
-        <h2 class="section-title">Sobre <span>Mim</span> (Currículo)</h2>
-        <div class="curriculo-grid">
-            <div>
-                <h3>🎓 Formação Acadêmica</h3>
-                <div class="cv-item">
-                    <h4>Licenciatura em Física & Matemática</h4>
-                    <p>Universidade Federal - Graduação Completa</p>
+    <section id="home" class="hero">
+        <div class="hero-bg-shape"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">Desperte o Futuro com <span>Robótica e Arduino</span></h1>
+                    <p class="hero-description">Aprenda a construir, programar e inovar. Nossos cursos práticos de robótica educacional com Arduino são projetados para todas as idades, transformando curiosidade em habilidade.</p>
+                    <a href="#robotica" class="btn btn-primary">Conheça o Curso</a>
                 </div>
-                <div class="cv-item">
-                    <h4>Especialização em Psicopedagogia</h4>
-                    <p>Foco em bloqueios de aprendizagem em exatas.</p>
-                </div>
-            </div>
-            <div>
-                <h3>💼 Experiência Profissional</h3>
-                <div class="cv-item">
-                    <h4>Professora Titular</h4>
-                    <p>10 anos de experiência em salas de aula de Ensino Médio.</p>
-                </div>
-                <div class="cv-item">
-                    <h4>Preparadora para Vestibulares</h4>
-                    <p>Foco em aprovações em cursos de alta concorrência.</p>
+                <div class="hero-image">
+                    <img src="https://i.imgur.com/8z8X9zQ.png" alt="Estudante com Robô Arduino">
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="disciplinas">
-        <h2 class="section-title">Disciplinas <span>Atendidas</span></h2>
-        <div class="grid-3">
-            <div class="materia-card">
-                <div class="icon-circle">📐</div>
-                <h3>Matemática</h3>
-                <p>Do reforço escolar básico à preparação para olimpíadas e exames nacionais.</p>
+    <section id="beneficios" class="section-padding features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Por Que Escolher a Studio Play?</h2>
+                <p class="section-subtitle">Desenvolvemos habilidades essenciais para o século XXI através de uma metodologia prática e envolvente.</p>
             </div>
-            <div class="materia-card">
-                <div class="icon-circle">⚛️</div>
-                <h3>Física</h3>
-                <p>Cinemática, Dinâmica, Óptica e Eletricidade com foco na compreensão dos conceitos.</p>
-            </div>
-            <div class="materia-card">
-                <div class="icon-circle">🔬</div>
-                <h3>Ciências</h3>
-                <p>Base sólida em biologia e química para o ensino fundamental II.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="valores" style="background: #eef2ff;">
-        <h2 class="section-title">Planos e <span>Valores</span></h2>
-        <div class="grid-3">
-            <div class="plano-card">
-                <h3>Aula Avulsa</h3>
-                <div class="price">R$ 120</div>
-                <p>60 minutos de aula focada em dúvidas urgentes.</p>
-            </div>
-            <div class="plano-card destaque">
-                <h3>Plano Mensal</h3>
-                <div class="price">R$ 440</div>
-                <p>1 aula por semana + suporte via chat para dúvidas rápidas.</p>
-            </div>
-            <div class="plano-card">
-                <h3>Plano Intensivo</h3>
-                <div class="price">R$ 800</div>
-                <p>2 aulas por semana + material didático exclusivo em PDF.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="feature-title">Pensamento Crítico</h3>
+                    <p class="feature-text">Estimulamos a resolução de problemas complexos através de desafios de programação e montagem.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="feature-title">Programação Prática</h3>
+                    <p class="feature-text">Aprenda C++ e lógica de programação enquanto dá vida aos seus próprios robôs e projetos.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="feature-title">Criatividade e Inovação</h3>
+                    <p class="feature-text">Incentivamos a criação de projetos autorais, desde a concepção da ideia até o protótipo funcional.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="funcionamento">
-        <h2 class="section-title">Como Funcionam as <span>Aulas</span></h2>
-        <div class="func-box">
-            <div>
-                <h4>Modalidade & Duração</h4>
-                <p>As aulas ocorrem via Google Meet com lousa digital interativa. Cada sessão tem a duração de 60 minutos cronometrados.</p>
-            </div>
-            <div>
-                <h4>Material & Reposição</h4>
-                <p>O aluno recebe resumos da aula. Reposições são feitas mediante aviso com 24h de antecedência.</p>
+    <section id="robotica" class="section-padding robotics">
+        <div class="container">
+            <div class="robotics-content">
+                <div class="robotics-image">
+                    <img src="https://i.imgur.com/yK3gQxR.jpg" alt="Kit Arduino e Componentes Eletrônicos">
+                </div>
+                <div class="robotics-details">
+                    <h2 class="section-title">Domine a Robótica com Arduino</h2>
+                    <p class="section-subtitle" style="margin: 0;">Nosso curso é uma jornada completa pelo mundo da eletrônica e programação. Utilizando a plataforma Arduino, você aprenderá a interagir com o mundo físico através de sensores e atuadores.</p>
+                    <div class="robotics-list">
+                        <div class="robotics-item">
+                            <div class="robotics-item-icon">
+                                <i class="fas fa-microchip"></i>
+                            </div>
+                            <div>
+                                <h4 class="robotics-item-title">Fundamentos de Eletrônica</h4>
+                                <p class="robotics-item-text">Entenda componentes como resistores, LEDs, sensores e como criar circuitos seguros e funcionais.</p>
+                            </div>
+                        </div>
+                        <div class="robotics-item">
+                            <div class="robotics-item-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <div>
+                                <h4 class="robotics-item-title">Programação em C++</h4>
+                                <p class="robotics-item-text">Domine a linguagem padrão do Arduino para controlar o comportamento dos seus projetos.</p>
+                            </div>
+                        </div>
+                        <div class="robotics-item">
+                            <div class="robotics-item-icon">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <div>
+                                <h4 class="robotics-item-title">Projetos Maker</h4>
+                                <p class="robotics-item-text">Crie desde sistemas de automação residencial simples até robôs móveis autônomos.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#contato" class="btn btn-primary" style="margin-top: 30px;">Garantir Minha Vaga</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="depoimentos">
-        <h2 class="section-title">Depoimentos dos <span>Responsáveis</span></h2>
-        <div class="grid-3">
-            <div class="depoimento-card">
-                <p>"A segurança que meu filho adquiriu nas provas de física depois das aulas foi impressionante."</p>
-                <span class="autor">Patrícia Lima, Mãe do Gabriel</span>
+    <section id="projetos" class="section-padding projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Galeria de Projetos dos Alunos</h2>
+                <p class="section-subtitle">Veja o que nossos alunos estão criando. O próximo projeto incrível pode ser o seu!</p>
             </div>
-            <div class="depoimento-card">
-                <p>"Explicações claras e muita paciência. Finalmente a matemática deixou de ser um problema em casa."</p>
-                <span class="autor">Roberto Dias, Pai da Sofia</span>
-            </div>
-            <div class="depoimento-card">
-                <p>"O acompanhamento mensal salvou o ano letivo do meu filho. Recomendo de olhos fechados!"</p>
-                <span class="autor">Juliana Castro, Mãe do Igor</span>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <img src="https://i.imgur.com/5z2Jg8m.jpg" alt="Braço Robótico">
+                    <div class="project-overlay">
+                        <h3 class="project-title">Braço Robótico Controlado</h3>
+                        <p class="project-category">Robótica Avançada</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://i.imgur.com/7q1j7c4.jpg" alt="Carro Seguidor de Linha">
+                    <div class="project-overlay">
+                        <h3 class="project-title">Carro Seguidor de Linha</h3>
+                        <p class="project-category">Iniciante em Arduino</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://i.imgur.com/9s6W5tX.jpg" alt="Estação Meteorológica">
+                    <div class="project-overlay">
+                        <h3 class="project-title">Estação Meteorológica IoT</h3>
+                        <p class="project-category">Internet das Coisas</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer>
-        <h2 class="logo">Arte de Aprender</h2>
-        <p>Aulas Particulares de Exatas | Profª Mariana Lins</p>
-        <p style="margin-top: 20px; color: var(--text-gray); font-size: 0.8rem;">
-            © 2026 - Todos os direitos reservados.
-        </p>
+    <section class="section-padding stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h2 class="stat-number">1500+</h2>
+                    <p class="stat-label">Alunos Formados</p>
+                </div>
+                <div class="stat-item">
+                    <h2 class="stat-number">350+</h2>
+                    <p class="stat-label">Projetos Criados</p>
+                </div>
+                <div class="stat-item">
+                    <h2 class="stat-number">50+</h2>
+                    <p class="stat-label">Escolas Parceiras</p>
+                </div>
+                <div class="stat-item">
+                    <h2 class="stat-number">100%</h2>
+                    <p class="stat-label">Aprendizado Prático</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="depoimentos" class="section-padding testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">O Que Dizem Nossos Alunos</h2>
+                <p class="section-subtitle">Histórias reais de quem transformou seu futuro com a Studio Play.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"O curso de Arduino abriu minha mente para o mundo da tecnologia. Nunca imaginei que poderia construir meu próprio robô em tão pouco tempo. Os professores são excelentes!"</p>
+                    <div class="testimonial-author">
+                        <img src="https://i.pravatar.cc/60?img=1" alt="Foto do Aluno" class="author-img">
+                        <div class="author-info">
+                            <h4>Pedro Santos</h4>
+                            <p>Aluno de Robótica</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Matriculei meu filho e fiquei impressionada com o desenvolvimento dele. Ele aprendeu a ter mais foco e a resolver problemas de forma criativa. Recomendo muito!"</p>
+                    <div class="testimonial-author">
+                        <img src="https://i.pravatar.cc/60?img=5" alt="Foto da Mãe" class="author-img">
+                        <div class="author-info">
+                            <h4>Mariana Costa</h4>
+                            <p>Mãe de Aluno</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"As aulas são muito dinâmicas e práticas. Aprendi não só a programar, mas a trabalhar em equipe e a tirar minhas ideias do papel. É uma experiência incrível."</p>
+                    <div class="testimonial-author">
+                        <img src="https://i.pravatar.cc/60?img=8" alt="Foto do Aluno" class="author-img">
+                        <div class="author-info">
+                            <h4>Lucas Oliveira</h4>
+                            <p>Aluno Avançado</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contato" class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <a href="#" class="footer-logo">
+                        <i class="fas fa-robot"></i>
+                        Studio Play
+                    </a>
+                    <p class="footer-desc">Sua escola de tecnologia e inovação. Preparando a próxima geração de criadores e pensadores através da robótica educacional.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links-col">
+                    <h4 class="footer-heading">Links Rápidos</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#beneficios">Sobre Nós</a></li>
+                        <li><a href="#robotica">Cursos</a></li>
+                        <li><a href="#projetos">Projetos</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-col">
+                    <h4 class="footer-heading">Cursos</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Robótica Iniciante</a></li>
+                        <li><a href="#">Arduino Avançado</a></li>
+                        <li><a href="#">Internet das Coisas (IoT)</a></li>
+                        <li><a href="#">Programação para Crianças</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4 class="footer-heading">Contato</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Av. Paulista, 1000 - SP</a></li>
+                        <li><a href="tel:+5511999999999"><i class="fas fa-phone" style="margin-right: 10px;"></i> (11) 99999-9999</a></li>
+                        <li><a href="mailto:contato@studioplay.com"><i class="fas fa-envelope" style="margin-right: 10px;"></i> contato@studioplay.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Studio Play. Todos os direitos reservados.</p>
+            </div>
+        </div>
     </footer>
 
+    <script>
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
+
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+
+        document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
+            hamburger.classList.remove("active");
+            navMenu.classList.remove("active");
+        }));
+    </script>
 </body>
 </html>
