@@ -206,10 +206,229 @@
         .plano-card.destaque { border: 2px solid var(--deep-sky); position: relative; transform: scale(1.05); }
         .price { font-size: 2.5rem; font-weight: 700; color: var(--cosmic-ink); margin: 20px 0; }
 
-        /* --- DEPOIMENTOS --- */
-        .depo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .depo-card { background: rgba(255,255,255,0.7); padding: 30px; border-radius: 20px; font-style: italic; box-shadow: var(--shadow); }
-        .depo-card b { display: block; margin-top: 15px; font-style: normal; color: var(--deep-sky); }
+       
+        /* Seção de Depoimentos */
+        .testimonials {
+            background-color: var(--bg-light);
+            position: relative;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--box-shadow);
+            border: 1px solid var(--light-blue);
+            position: relative;
+        }
+        
+        .testimonial-quote {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            font-style: italic;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-quote::before {
+            content: '\201C';
+            font-size: 5rem;
+            color: var(--light-blue);
+            position: absolute;
+            top: -40px;
+            left: -20px;
+            opacity: 0.5;
+            z-index: -1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+            border: 3px solid var(--primary-blue);
+        }
+        
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Rodapé (Footer) */
+        .footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 80px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-logo i {
+            margin-right: 8px;
+            color: var(--secondary-blue);
+        }
+
+        .footer-desc {
+            color: var(--light-blue);
+            margin-bottom: 25px;
+        }
+
+        .social-links {
+            display: flex;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--gradient-primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-heading {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: var(--white);
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: var(--light-blue);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-blue);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light-blue);
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text {
+                padding-right: 0;
+                margin-bottom: 50px;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .robotics-content {
+                flex-direction: column;
+            }
+            
+            .robotics-image {
+                order: -1;
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: var(--white);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+                padding: 20px 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-item {
+                margin: 20px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+            
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                padding: 12px 28px;
+            }
+        
 
         /* --- RESPONSIVIDADE --- */
         @media (max-width: 768px) {
