@@ -1,237 +1,270 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Arte de Aprender | Aulas Particulares</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arte de Aprender | Aulas Particulares</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* VARIÁVEIS DE DESIGN - Centralize as cores aqui */
+        :root {
+            --primary: #9b5cff;
+            --secondary: #ff5fa2;
+            --bg-dark: #0b0f2b;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-dim: #b0b3c1;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+        /* RESET E BASE */
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    scroll-behavior: smooth;
-}
+        body {
+            background-color: var(--bg-dark);
+            /* Efeito de luzes flutuantes no fundo */
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(155, 92, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(255, 95, 162, 0.08) 0%, transparent 40%);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-body {
-    background: radial-gradient(circle at top, #3b1d6a, #0b0f2b);
-    color: #fff;
-}
+        /* NAVEGAÇÃO */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            position: fixed;
+            top: 0; width: 100%; z-index: 1000;
+            background: rgba(11, 15, 43, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+        }
 
-/* NAV */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px 80px;
-}
+        .logo {
+            font-weight: 700;
+            font-size: 1.4rem;
+            background: linear-gradient(to right, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-nav h1 {
-    font-size: 22px;
-    font-weight: 700;
-}
+        nav ul { display: flex; gap: 30px; list-style: none; }
+        nav ul li a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+        nav ul li a:hover { opacity: 1; color: var(--primary); }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-}
+        /* BOTÕES */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            border: none;
+            padding: 12px 28px;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+            cursor: pointer;
+        }
 
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    opacity: .85;
-}
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(155, 92, 255, 0.4);
+        }
 
-nav ul li a:hover {
-    opacity: 1;
-}
+        /* SEÇÕES GERAIS */
+        section { padding: 120px 8% 80px; }
+        .section-title { font-size: 2.5rem; margin-bottom: 20px; position: relative; }
+        .section-title::after {
+            content: ''; display: block; width: 60px; height: 4px;
+            background: var(--primary); margin-top: 10px; border-radius: 2px;
+        }
 
-nav button {
-    background: linear-gradient(135deg, #ff5fa2, #9b5cff);
-    border: none;
-    padding: 12px 25px;
-    border-radius: 25px;
-    color: white;
-    cursor: pointer;
-    font-weight: 600;
-}
+        /* HERO SECTION */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            align-items: center;
+            min-height: 90vh;
+        }
 
-/* HERO */
-section {
-    padding: 80px;
-}
+        .hero h2 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; margin-bottom: 20px; }
+        .hero h2 span { color: var(--primary); }
+        .hero p { font-size: 1.1rem; color: var(--text-dim); margin-bottom: 30px; max-width: 500px; }
 
-.hero {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 40px;
-}
+        .hero-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            border-radius: 30px;
+            animation: float 6s ease-in-out infinite;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
 
-.hero h2 {
-    font-size: 48px;
-    margin-bottom: 20px;
-}
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
 
-.hero p {
-    opacity: .85;
-    max-width: 480px;
-}
+        /* CARDS DE CONTEÚDO (Sobre e Metodologia) */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
 
-.hero-card {
-    background: linear-gradient(145deg, #1b1f4d, #111437);
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 0 40px rgba(155,92,255,0.25);
-}
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            border-radius: 24px;
+            transition: var(--transition);
+        }
 
-/* SEÇÕES */
-.section-title {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
+        .card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
 
-.section-text {
-    max-width: 700px;
-    opacity: .85;
-    line-height: 1.6;
-}
+        .card h3 { color: var(--primary); margin-bottom: 15px; }
+        .card p { color: var(--text-dim); font-size: 0.95rem; }
 
-/* CARDS */
-.cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    margin-top: 40px;
-}
+        /* SEÇÃO SOBRE (Layout Diferente) */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
 
-.card {
-    background: linear-gradient(145deg, #171b47, #101336);
-    border-radius: 20px;
-    padding: 30px;
-}
+        /* CONTATO */
+        .contact-box {
+            background: linear-gradient(145deg, rgba(155, 92, 255, 0.1), rgba(255, 95, 162, 0.05));
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            padding: 60px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-/* CONTATO */
-.contact {
-    background: linear-gradient(145deg, #14184a, #0a0d2a);
-    border-radius: 25px;
-    padding: 40px;
-    max-width: 600px;
-}
+        /* FOOTER */
+        footer {
+            padding: 60px 8%;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
 
-/* FOOTER */
-footer {
-    background: #090b22;
-    padding: 40px;
-    text-align: center;
-    opacity: .7;
-}
-
-/* RESPONSIVO */
-@media (max-width: 900px) {
-    nav, section {
-        padding: 40px;
-    }
-
-    .hero {
-        grid-template-columns: 1fr;
-    }
-
-    .cards {
-        grid-template-columns: 1fr;
-    }
-}
-</style>
+        /* RESPONSIVIDADE */
+        @media (max-width: 900px) {
+            nav ul { display: none; }
+            .hero, .about-content { grid-template-columns: 1fr; text-align: center; }
+            .hero p { margin: 0 auto 30px; }
+            section { padding: 100px 5% 50px; }
+        }
+    </style>
 </head>
-
 <body>
 
 <nav>
-    <h1>Arte de Aprender</h1>
+    <div class="logo">Arte de Aprender</div>
     <ul>
         <li><a href="#inicio">Início</a></li>
-        <li><a href="#sobre">Sobre mim</a></li>
+        <li><a href="#sobre">Sobre</a></li>
         <li><a href="#metodologia">Metodologia</a></li>
         <li><a href="#contato">Contato</a></li>
     </ul>
-    <a href="https://wa.me/55SEUNUMERO" target="_blank">
-        <button>Agendar Aula</button>
-    </a>
+    <a href="https://wa.me/55SEUNUMERO" class="btn-primary">Agendar Aula</a>
 </nav>
 
-<!-- INÍCIO -->
 <section id="inicio" class="hero">
-    <div>
-        <h2>Aprender é arte.<br>Ensinar é compromisso.</h2>
-        <p>
-            O projeto Arte de Aprender nasceu da necessidade de ensinar
-            com calma, método e respeito ao tempo do aluno.
-            Aqui não tem fórmula mágica — tem construção.
-        </p>
+    <div class="hero-content">
+        <h2>Aprender é <span>arte</span>.<br>Ensinar é compromisso.</h2>
+        <p>Aulas particulares de Matemática e Física focadas na construção do conhecimento, respeitando o seu tempo e o seu ritmo.</p>
+        <a href="#metodologia" class="btn-primary">Ver Metodologia</a>
     </div>
-
-    <div class="hero-card">
-        <strong>Arte de Aprender</strong><br><br>
-        📘 Matemática e Física<br>
-        🎯 Ensino Fundamental e Médio<br>
-        🧠 Aulas particulares personalizadas
+    <div class="hero-visual">
+        <div class="hero-card">
+            <h3 style="color: var(--secondary); margin-bottom: 10px;">Disciplinas</h3>
+            <p style="color: #fff; margin-bottom: 5px;">📐 Matemática Avançada</p>
+            <p style="color: #fff; margin-bottom: 5px;">⚡ Física e Mecânica</p>
+            <p style="color: #fff; margin-bottom: 20px;">🎓 Reforço Escolar</p>
+            <hr style="border: 0; border-top: 1px solid var(--glass-border); margin-bottom: 20px;">
+            <small style="color: var(--primary);">Disponível Presencial e Online</small>
+        </div>
     </div>
 </section>
 
-<!-- SOBRE -->
 <section id="sobre">
-    <h2 class="section-title">Sobre mim</h2>
-    <p class="section-text">
-        Sou professora e acredito no ensino como processo,
-        não como produto. Cada aluno carrega uma história,
-        dificuldades próprias e um ritmo único.
-        Meu trabalho é construir pontes entre o conteúdo
-        e a compreensão real — sem pressa, sem enganação.
-    </p>
+    <div class="about-content">
+        <div>
+            <h2 class="section-title">Sobre mim</h2>
+            <p style="color: var(--text-dim); margin-bottom: 20px;">
+                Acredito que ninguém nasce "ruim" em exatas. O que falta, muitas vezes, é uma base sólida e uma explicação que faça sentido para a sua realidade.
+            </p>
+            <p style="color: var(--text-dim);">
+                Com anos de experiência, meu objetivo é transformar o medo dos números em confiança para resolver qualquer desafio acadêmico.
+            </p>
+        </div>
+        <div class="card" style="text-align: center;">
+            <h1 style="font-size: 3rem; color: var(--secondary);">+100</h1>
+            <p>Alunos impactados pela metodologia Arte de Aprender</p>
+        </div>
+    </div>
 </section>
 
-<!-- METODOLOGIA -->
 <section id="metodologia">
     <h2 class="section-title">Metodologia</h2>
-
-    <div class="cards">
+    <div class="grid-cards">
         <div class="card">
-            <h3>Base sólida</h3>
-            <p>Revisão do que falta antes de avançar. Sem pular degraus.</p>
+            <h3>Base Sólida</h3>
+            <p>Não avançamos sem tapar os buracos do passado. Revisamos conceitos básicos para que o novo conteúdo faça sentido.</p>
         </div>
         <div class="card">
-            <h3>Didática clara</h3>
-            <p>Explicação simples, linguagem direta, exemplos reais.</p>
+            <h3>Didática Criativa</h3>
+            <p>Linguagem simples e exemplos do cotidiano para tornar a física e a matemática algo palpável.</p>
         </div>
         <div class="card">
-            <h3>Acompanhamento</h3>
-            <p>O progresso é observado aula por aula.</p>
+            <h3>Foco no Aluno</h3>
+            <p>Cada aula é preparada exclusivamente para a sua dúvida e para o seu objetivo final.</p>
         </div>
     </div>
 </section>
 
-<!-- CONTATO -->
 <section id="contato">
-    <h2 class="section-title">Contato</h2>
-
-    <div class="contact">
-        <p>
-            📌 Aulas particulares presenciais ou online<br><br>
-            📲 Para agendar uma aula ou tirar dúvidas,
-            entre em contato pelo WhatsApp.
+    <div class="contact-box">
+        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Vamos evoluir juntos?</h2>
+        <p style="color: var(--text-dim); margin-bottom: 30px;">
+            Estou disponível para aulas individuais ou pequenos grupos. Entre em contato para verificar horários disponíveis.
         </p>
-        <br>
-        <a href="https://wa.me/55SEUNUMERO" target="_blank">
-            <button>Falar no WhatsApp</button>
+        <a href="https://wa.me/55SEUNUMERO" class="btn-primary" style="font-size: 1.1rem; padding: 15px 40px;">
+            Chamar no WhatsApp
         </a>
     </div>
 </section>
 
 <footer>
-    © 2026 • Arte de Aprender • Ensino com método e propósito
+    <p>© 2026 • Arte de Aprender • Design Premium para Educação</p>
 </footer>
 
 </body>
