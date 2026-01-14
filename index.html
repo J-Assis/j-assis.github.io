@@ -14,14 +14,14 @@
             --white: #ffffff;
             --text-dark: #2d3436;
             --text-gray: #636e72;
-            --glass: rgba(255, 255, 255, 0.85);
+            --glass: rgba(255, 255, 255, 0.9);
             --shadow: 0 20px 40px rgba(108, 92, 231, 0.08);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
         body { background-color: var(--bg-body); color: var(--text-dark); overflow-x: hidden; line-height: 1.6; }
 
-        /* --- BACKGROUND DECOR --- */
+        /* --- DECORAÇÃO --- */
         .blob {
             position: absolute; width: 600px; height: 600px;
             background: radial-gradient(circle, rgba(108, 92, 231, 0.07) 0%, transparent 70%);
@@ -35,70 +35,69 @@
             background: var(--glass); backdrop-filter: blur(15px);
             z-index: 1000; border-bottom: 1px solid rgba(0,0,0,0.05);
         }
-        .logo { font-weight: 700; font-size: 1.4rem; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; }
-        nav ul { display: flex; list-style: none; gap: 20px; }
-        nav ul li a { text-decoration: none; color: var(--text-dark); font-size: 0.85rem; font-weight: 600; transition: 0.3s; }
+        .logo { font-weight: 700; font-size: 1.4rem; color: var(--primary); text-transform: uppercase; }
+        nav ul { display: flex; list-style: none; gap: 15px; }
+        nav ul li a { text-decoration: none; color: var(--text-dark); font-size: 0.8rem; font-weight: 600; transition: 0.3s; }
         nav ul li a:hover { color: var(--primary); }
         
-        /* Botão WhatsApp */
         .btn-whatsapp {
-            background: #25d366; color: white; padding: 10px 22px;
-            border-radius: 50px; text-decoration: none; font-weight: 600;
+            background: #25d366; color: white; padding: 10px 20px;
+            border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.8rem;
             display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-            transition: 0.3s;
         }
-        .btn-whatsapp:hover { transform: scale(1.05); background: #1eb956; }
 
         /* --- SEÇÕES --- */
-        section { padding: 100px 8%; position: relative; }
-        .section-title { text-align: center; margin-bottom: 60px; font-size: 2.5rem; font-weight: 700; }
+        section { padding: 90px 8%; position: relative; }
+        .section-title { text-align: center; margin-bottom: 50px; font-size: 2.2rem; font-weight: 700; }
         .section-title span { color: var(--primary); }
 
         /* --- HERO --- */
-        .hero { display: flex; align-items: center; justify-content: space-between; padding-top: 180px; gap: 40px; }
-        .hero-text h1 { font-size: 3.8rem; line-height: 1.1; margin-bottom: 25px; }
+        .hero { display: flex; align-items: center; justify-content: space-between; padding-top: 160px; gap: 40px; }
+        .hero-text h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 25px; }
         .hero-img { 
             flex: 1; background: var(--white); padding: 12px; border-radius: 40px; 
-            box-shadow: var(--shadow); transform: perspective(1000px) rotateY(-8deg) rotateX(2deg);
+            box-shadow: var(--shadow); transform: perspective(1000px) rotateY(-8deg);
         }
         .hero-img img { width: 100%; border-radius: 30px; display: block; }
 
-        /* --- SOBRE PROJETO --- */
-        .projeto-box { background: var(--white); padding: 50px; border-radius: 30px; box-shadow: var(--shadow); }
-
-        /* --- SOBRE MIM (CURRÍCULO) --- */
-        .curriculo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 30px; }
-        .cv-item { margin-bottom: 20px; padding-left: 20px; border-left: 3px solid var(--primary); }
-        .cv-item h4 { color: var(--primary); font-size: 1.1rem; }
+        /* --- SOBRE PROJETO / MIM --- */
+        .projeto-box { background: var(--white); padding: 40px; border-radius: 30px; box-shadow: var(--shadow); margin-bottom: 30px; }
+        .curriculo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .cv-item { margin-bottom: 15px; padding-left: 15px; border-left: 3px solid var(--primary); }
+        .cv-item h4 { color: var(--primary); font-size: 1rem; }
 
         /* --- DISCIPLINAS --- */
-        .disciplinas-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
         .materia-card {
-            background: var(--white); padding: 50px 30px; border-radius: 30px;
-            text-align: center; transition: 0.4s; border: 1px solid rgba(0,0,0,0.02);
-            box-shadow: var(--shadow);
+            background: var(--white); padding: 40px 25px; border-radius: 25px;
+            text-align: center; transition: 0.4s; box-shadow: var(--shadow);
         }
-        .materia-card:hover { transform: translateY(-15px); background: var(--primary); color: white; }
-        .materia-card h3 { margin: 20px 0 15px; font-size: 1.5rem; }
-        .icon-circle { 
-            width: 80px; height: 80px; background: #f0edff; border-radius: 50%; 
-            display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 2rem;
+        .materia-card:hover { transform: translateY(-10px); background: var(--primary); color: white; }
+        .icon-circle { width: 70px; height: 70px; background: #f0edff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 1.8rem; }
+
+        /* --- VALORES --- */
+        .plano-card {
+            background: var(--white); padding: 35px; border-radius: 25px; text-align: center;
+            box-shadow: var(--shadow); border: 1px solid #eee;
         }
+        .price { font-size: 2.2rem; font-weight: 700; color: var(--primary); margin: 15px 0; }
+        .destaque { border: 2px solid var(--primary); transform: scale(1.05); }
+
+        /* --- FUNCIONAMENTO --- */
+        .func-box { background: #eef2ff; padding: 40px; border-radius: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
 
         /* --- DEPOIMENTOS --- */
-        .depoimentos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
         .depoimento-card {
-            background: #fff; padding: 40px; border-radius: 25px; font-style: italic;
-            position: relative; box-shadow: var(--shadow); border: 1px dashed var(--primary);
+            background: #fff; padding: 30px; border-radius: 20px; font-style: italic;
+            box-shadow: var(--shadow); border: 1px dashed var(--primary);
         }
-        .depoimento-card::before { content: "“"; font-size: 5rem; position: absolute; top: -10px; left: 20px; color: rgba(108, 92, 231, 0.1); }
-        .autor { margin-top: 20px; font-weight: 700; color: var(--primary); font-style: normal; display: block; }
+        .autor { margin-top: 15px; font-weight: 700; color: var(--primary); font-style: normal; display: block; }
 
         /* --- FOOTER --- */
-        footer { background: var(--white); padding: 60px 8%; text-align: center; border-top: 1px solid #eee; }
+        footer { background: var(--white); padding: 50px 8%; text-align: center; border-top: 1px solid #eee; }
 
-        @media (max-width: 900px) {
-            .hero, .curriculo-grid, .disciplinas-container { grid-template-columns: 1fr; flex-direction: column; text-align: center; }
+        @media (max-width: 850px) {
+            .hero, .curriculo-grid, .func-box { grid-template-columns: 1fr; flex-direction: column; text-align: center; }
             .hero-text h1 { font-size: 2.5rem; }
         }
     </style>
@@ -111,99 +110,132 @@
         <div class="logo">Arte de Aprender</div>
         <nav>
             <ul>
-                <li><a href="#projeto">O Projeto</a></li>
+                <li><a href="#projeto">Projeto</a></li>
                 <li><a href="#sobre-mim">Sobre Mim</a></li>
                 <li><a href="#disciplinas">Disciplinas</a></li>
-                <li><a href="#planos">Valores</a></li>
+                <li><a href="#valores">Valores</a></li>
                 <li><a href="#depoimentos">Depoimentos</a></li>
             </ul>
         </nav>
-        <a href="https://wa.me/5511999999999" target="_blank" class="btn-whatsapp">
-            <span>WhatsApp</span>
-        </a>
+        <a href="https://wa.me/5511999999999" target="_blank" class="btn-whatsapp">WhatsApp</a>
     </header>
 
     <section class="hero">
         <div class="hero-text">
-            <h1>Educação com <span style="color: var(--primary);">Significado</span>.</h1>
-            <p>Aulas personalizadas de Matemática, Física e Ciências para alunos que buscam excelência e compreensão real.</p>
-            <a href="#disciplinas" style="color: var(--primary); font-weight: 700; text-decoration: none;">Explorar Matérias →</a>
+            <h1>Aprender é uma <span style="color: var(--primary);">Arte</span>.</h1>
+            <p>Apoio pedagógico especializado em Matemática, Física e Ciências. Transformamos o medo das exatas em confiança e resultados.</p>
+            <a href="#valores" class="btn-whatsapp" style="background: var(--primary); display: inline-flex; width: fit-content;">Ver Planos de Aula</a>
         </div>
         <div class="hero-img">
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" alt="Professora em Aula">
+            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80" alt="Estudante">
         </div>
     </section>
 
     <section id="projeto">
         <div class="projeto-box">
-            <h2 class="section-title">Sobre o <span>Projeto</span></h2>
-            <p>O <strong>Arte de Aprender</strong> nasceu da necessidade de um ensino mais humano. Aqui, não apenas resolvemos exercícios; ensinamos o aluno a pensar de forma crítica e autônoma, conectando as fórmulas abstratas com o mundo real.</p>
+            <h2 class="section-title">O <span>Projeto</span></h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto;">O projeto "Arte de Aprender" foca no ensino tradicional revisitado: clareza, paciência e personalização. Aqui, cada dificuldade é tratada como um degrau para o próximo nível de conhecimento.</p>
         </div>
     </section>
 
-    <section id="sobre-mim" style="background: #f1f3f9;">
-        <h2 class="section-title">Meu <span>Currículo</span></h2>
+    <section id="sobre-mim" style="background: #f1f4fb;">
+        <h2 class="section-title">Sobre <span>Mim</span> (Currículo)</h2>
         <div class="curriculo-grid">
             <div>
-                <h3>Formação Acadêmica</h3>
+                <h3>🎓 Formação Acadêmica</h3>
                 <div class="cv-item">
-                    <h4>Licenciatura Plena em Física</h4>
-                    <p>Universidade Federal (2012 - 2016)</p>
+                    <h4>Licenciatura em Física & Matemática</h4>
+                    <p>Universidade Federal - Graduação Completa</p>
                 </div>
                 <div class="cv-item">
-                    <h4>Pós-Graduação em Psicopedagogia</h4>
-                    <p>Instituto Educacional Avançado (2018)</p>
+                    <h4>Especialização em Psicopedagogia</h4>
+                    <p>Foco em bloqueios de aprendizagem em exatas.</p>
                 </div>
             </div>
             <div>
-                <h3>Experiência Profissional</h3>
+                <h3>💼 Experiência Profissional</h3>
                 <div class="cv-item">
-                    <h4>Professora de Ensino Médio</h4>
-                    <p>Colégio Referência (5 anos de atuação)</p>
+                    <h4>Professora Titular</h4>
+                    <p>10 anos de experiência em salas de aula de Ensino Médio.</p>
                 </div>
                 <div class="cv-item">
-                    <h4>Mentora Acadêmica</h4>
-                    <p>Especialista em preparação para vestibulares e ENEM.</p>
+                    <h4>Preparadora para Vestibulares</h4>
+                    <p>Foco em aprovações em cursos de alta concorrência.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="disciplinas">
-        <h2 class="section-title">Disciplinas <span>Abordadas</span></h2>
-        <div class="disciplinas-container">
+        <h2 class="section-title">Disciplinas <span>Atendidas</span></h2>
+        <div class="grid-3">
             <div class="materia-card">
                 <div class="icon-circle">📐</div>
                 <h3>Matemática</h3>
-                <p>Cálculo, Geometria e Raciocínio Lógico do Fundamental ao Médio.</p>
+                <p>Do reforço escolar básico à preparação para olimpíadas e exames nacionais.</p>
             </div>
             <div class="materia-card">
                 <div class="icon-circle">⚛️</div>
                 <h3>Física</h3>
-                <p>Mecânica, Termodinâmica e Eletricidade com foco em compreensão prática.</p>
+                <p>Cinemática, Dinâmica, Óptica e Eletricidade com foco na compreensão dos conceitos.</p>
             </div>
             <div class="materia-card">
                 <div class="icon-circle">🔬</div>
                 <h3>Ciências</h3>
-                <p>Introdução à biologia e química, estimulando a curiosidade científica.</p>
+                <p>Base sólida em biologia e química para o ensino fundamental II.</p>
             </div>
         </div>
     </section>
 
-    <section id="depoimentos" style="background: #fdfdfd;">
-        <h2 class="section-title">Voz dos <span>Responsáveis</span></h2>
-        <div class="depoimentos-grid">
+    <section id="valores" style="background: #eef2ff;">
+        <h2 class="section-title">Planos e <span>Valores</span></h2>
+        <div class="grid-3">
+            <div class="plano-card">
+                <h3>Aula Avulsa</h3>
+                <div class="price">R$ 120</div>
+                <p>60 minutos de aula focada em dúvidas urgentes.</p>
+            </div>
+            <div class="plano-card destaque">
+                <h3>Plano Mensal</h3>
+                <div class="price">R$ 440</div>
+                <p>1 aula por semana + suporte via chat para dúvidas rápidas.</p>
+            </div>
+            <div class="plano-card">
+                <h3>Plano Intensivo</h3>
+                <div class="price">R$ 800</div>
+                <p>2 aulas por semana + material didático exclusivo em PDF.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="funcionamento">
+        <h2 class="section-title">Como Funcionam as <span>Aulas</span></h2>
+        <div class="func-box">
+            <div>
+                <h4>Modalidade & Duração</h4>
+                <p>As aulas ocorrem via Google Meet com lousa digital interativa. Cada sessão tem a duração de 60 minutos cronometrados.</p>
+            </div>
+            <div>
+                <h4>Material & Reposição</h4>
+                <p>O aluno recebe resumos da aula. Reposições são feitas mediante aviso com 24h de antecedência.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="depoimentos">
+        <h2 class="section-title">Depoimentos dos <span>Responsáveis</span></h2>
+        <div class="grid-3">
             <div class="depoimento-card">
-                <p>"A paciência e o método da professora mudaram completamente a relação do meu filho com a matemática. As notas foram apenas uma consequência."</p>
-                <span class="autor">Ana Paula, mãe do Pedro (9º ano)</span>
+                <p>"A segurança que meu filho adquiriu nas provas de física depois das aulas foi impressionante."</p>
+                <span class="autor">Patrícia Lima, Mãe do Gabriel</span>
             </div>
             <div class="depoimento-card">
-                <p>"Excelente profissional. Consegue explicar física de um jeito que parece simples. Minha filha hoje estuda com muito mais confiança."</p>
-                <span class="autor">Marcos Souza, pai da Letícia (2º EM)</span>
+                <p>"Explicações claras e muita paciência. Finalmente a matemática deixou de ser um problema em casa."</p>
+                <span class="autor">Roberto Dias, Pai da Sofia</span>
             </div>
             <div class="depoimento-card">
-                <p>"O acompanhamento mensal foi o melhor investimento que fizemos. Organização e clareza total no ensino das ciências."</p>
-                <span class="autor">Clara Mendes, mãe do Lucas (8º ano)</span>
+                <p>"O acompanhamento mensal salvou o ano letivo do meu filho. Recomendo de olhos fechados!"</p>
+                <span class="autor">Juliana Castro, Mãe do Igor</span>
             </div>
         </div>
     </section>
@@ -212,8 +244,7 @@
         <h2 class="logo">Arte de Aprender</h2>
         <p>Aulas Particulares de Exatas | Profª Mariana Lins</p>
         <p style="margin-top: 20px; color: var(--text-gray); font-size: 0.8rem;">
-            © 2026 - Todos os direitos reservados. <br>
-            "A educação é o movimento da escuridão para a luz."
+            © 2026 - Todos os direitos reservados.
         </p>
     </footer>
 
