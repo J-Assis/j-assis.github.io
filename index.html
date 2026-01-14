@@ -6,19 +6,20 @@
     <title>Arte de Aprender | Aulas Particulares</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* VARIÁVEIS DE DESIGN - Centralize as cores aqui */
+        /* NOVA PALETA DE CORES BASEADA NA IMAGEM */
         :root {
-            --primary: #9b5cff;
-            --secondary: #ff5fa2;
-            --bg-dark: #0b0f2b;
-            --glass: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text-main: #ffffff;
-            --text-dim: #b0b3c1;
+            --bg-dark: #001B48;       /* Azul Marinho Profundo (Base) */
+            --primary: #00457A;      /* Azul Escuro Real */
+            --accent: #008ABE;       /* Azul Vivo (Destaque) */
+            --soft-blue: #97CADB;    /* Azul Pastel */
+            --ice-blue: #D6E8EE;     /* Azul Gelo (Texto/Detalhe) */
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(151, 202, 219, 0.2);
+            --text-main: #D6E8EE;
+            --text-dim: rgba(214, 232, 238, 0.7);
             --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        /* RESET E BASE */
         * {
             margin: 0; padding: 0; box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
@@ -27,13 +28,14 @@
 
         body {
             background-color: var(--bg-dark);
-            /* Efeito de luzes flutuantes no fundo */
+            /* Gradiente usando os tons da sua paleta */
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(155, 92, 255, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(255, 95, 162, 0.08) 0%, transparent 40%);
+                radial-gradient(circle at 15% 15%, var(--primary) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, var(--accent) 0%, transparent 40%);
+            background-attachment: fixed;
             color: var(--text-main);
-            overflow-x: hidden;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* NAVEGAÇÃO */
@@ -44,35 +46,38 @@
             padding: 20px 8%;
             position: fixed;
             top: 0; width: 100%; z-index: 1000;
-            background: rgba(11, 15, 43, 0.85);
-            backdrop-filter: blur(12px);
+            background: rgba(0, 27, 72, 0.8);
+            backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--glass-border);
         }
 
         .logo {
             font-weight: 700;
-            font-size: 1.4rem;
-            background: linear-gradient(to right, #fff, var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 1.5rem;
+            letter-spacing: -1px;
+            color: #fff;
         }
 
-        nav ul { display: flex; gap: 30px; list-style: none; }
+        .logo span { color: var(--accent); }
+
+        nav ul { display: flex; gap: 35px; list-style: none; }
         nav ul li a {
             color: var(--text-main);
             text-decoration: none;
-            font-size: 0.9rem;
-            opacity: 0.7;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
             transition: var(--transition);
         }
-        nav ul li a:hover { opacity: 1; color: var(--primary); }
+        nav ul li a:hover { opacity: 1; color: var(--soft-blue); }
 
-        /* BOTÕES */
-        .btn-primary {
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            border: none;
-            padding: 12px 28px;
-            border-radius: 50px;
+        /* BOTÃO PRINCIPAL */
+        .btn-cta {
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            border: 1px solid var(--soft-blue);
+            padding: 12px 30px;
+            border-radius: 8px; /* Design mais sóbrio e quadrado */
             color: white;
             font-weight: 600;
             text-decoration: none;
@@ -81,190 +86,149 @@
             cursor: pointer;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(155, 92, 255, 0.4);
+        .btn-cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(0, 138, 190, 0.4);
         }
 
-        /* SEÇÕES GERAIS */
-        section { padding: 120px 8% 80px; }
-        .section-title { font-size: 2.5rem; margin-bottom: 20px; position: relative; }
-        .section-title::after {
-            content: ''; display: block; width: 60px; height: 4px;
-            background: var(--primary); margin-top: 10px; border-radius: 2px;
+        /* SEÇÕES */
+        section { padding: 140px 8% 80px; }
+        .section-title { 
+            font-size: 2.8rem; 
+            margin-bottom: 30px; 
+            font-weight: 700;
         }
 
-        /* HERO SECTION */
+        /* HERO */
         .hero {
             display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 60px;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
             align-items: center;
-            min-height: 90vh;
+            min-height: 85vh;
         }
 
-        .hero h2 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; margin-bottom: 20px; }
-        .hero h2 span { color: var(--primary); }
-        .hero p { font-size: 1.1rem; color: var(--text-dim); margin-bottom: 30px; max-width: 500px; }
+        .hero h2 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1; margin-bottom: 25px; }
+        .hero p { font-size: 1.2rem; color: var(--text-dim); margin-bottom: 40px; }
 
         .hero-card {
             background: var(--glass);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            padding: 40px;
-            border-radius: 30px;
-            animation: float 6s ease-in-out infinite;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            position: relative;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, var(--accent), transparent, var(--soft-blue));
+            z-index: -1;
+            border-radius: 22px;
+            opacity: 0.3;
         }
 
-        /* CARDS DE CONTEÚDO (Sobre e Metodologia) */
+        /* CARDS DE CONTEÚDO */
         .grid-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            margin-top: 50px;
+            margin-top: 60px;
         }
 
         .card {
-            background: var(--glass);
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--glass-border);
             padding: 40px;
-            border-radius: 24px;
+            border-radius: 15px;
             transition: var(--transition);
         }
 
         .card:hover {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(0, 138, 190, 0.05);
+            border-color: var(--accent);
             transform: translateY(-10px);
-            border-color: var(--primary);
         }
 
-        .card h3 { color: var(--primary); margin-bottom: 15px; }
-        .card p { color: var(--text-dim); font-size: 0.95rem; }
-
-        /* SEÇÃO SOBRE (Layout Diferente) */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        /* CONTATO */
-        .contact-box {
-            background: linear-gradient(145deg, rgba(155, 92, 255, 0.1), rgba(255, 95, 162, 0.05));
-            border: 1px solid var(--glass-border);
-            border-radius: 40px;
-            padding: 60px;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
+        .card h3 { color: var(--soft-blue); margin-bottom: 20px; font-size: 1.5rem; }
+        .card p { color: var(--text-dim); }
 
         /* FOOTER */
         footer {
-            padding: 60px 8%;
+            padding: 80px 8% 40px;
             text-align: center;
+            background: #001233;
             border-top: 1px solid var(--glass-border);
-            color: var(--text-dim);
-            font-size: 0.9rem;
         }
 
-        /* RESPONSIVIDADE */
-        @media (max-width: 900px) {
+        /* RESPONSIVO */
+        @media (max-width: 1000px) {
+            .hero { grid-template-columns: 1fr; text-align: center; }
             nav ul { display: none; }
-            .hero, .about-content { grid-template-columns: 1fr; text-align: center; }
-            .hero p { margin: 0 auto 30px; }
-            section { padding: 100px 5% 50px; }
+            .section-title { font-size: 2.2rem; }
         }
     </style>
 </head>
 <body>
 
 <nav>
-    <div class="logo">Arte de Aprender</div>
+    <div class="logo">ARTE DE <span>APRENDER</span></div>
     <ul>
         <li><a href="#inicio">Início</a></li>
         <li><a href="#sobre">Sobre</a></li>
         <li><a href="#metodologia">Metodologia</a></li>
-        <li><a href="#contato">Contato</a></li>
     </ul>
-    <a href="https://wa.me/55SEUNUMERO" class="btn-primary">Agendar Aula</a>
+    <a href="https://wa.me/55SEUNUMERO" class="btn-cta">Agendar Agora</a>
 </nav>
 
 <section id="inicio" class="hero">
-    <div class="hero-content">
-        <h2>Aprender é <span>arte</span>.<br>Ensinar é compromisso.</h2>
-        <p>Aulas particulares de Matemática e Física focadas na construção do conhecimento, respeitando o seu tempo e o seu ritmo.</p>
-        <a href="#metodologia" class="btn-primary">Ver Metodologia</a>
+    <div>
+        <h2>Mergulhe no <span>conhecimento</span>.</h2>
+        <p>Domine Matemática e Física com um método focado na clareza e na resolução de problemas reais.</p>
+        <a href="#contato" class="btn-cta">Começar Jornada</a>
     </div>
-    <div class="hero-visual">
-        <div class="hero-card">
-            <h3 style="color: var(--secondary); margin-bottom: 10px;">Disciplinas</h3>
-            <p style="color: #fff; margin-bottom: 5px;">📐 Matemática Avançada</p>
-            <p style="color: #fff; margin-bottom: 5px;">⚡ Física e Mecânica</p>
-            <p style="color: #fff; margin-bottom: 20px;">🎓 Reforço Escolar</p>
-            <hr style="border: 0; border-top: 1px solid var(--glass-border); margin-bottom: 20px;">
-            <small style="color: var(--primary);">Disponível Presencial e Online</small>
-        </div>
-    </div>
-</section>
 
-<section id="sobre">
-    <div class="about-content">
-        <div>
-            <h2 class="section-title">Sobre mim</h2>
-            <p style="color: var(--text-dim); margin-bottom: 20px;">
-                Acredito que ninguém nasce "ruim" em exatas. O que falta, muitas vezes, é uma base sólida e uma explicação que faça sentido para a sua realidade.
-            </p>
-            <p style="color: var(--text-dim);">
-                Com anos de experiência, meu objetivo é transformar o medo dos números em confiança para resolver qualquer desafio acadêmico.
-            </p>
-        </div>
-        <div class="card" style="text-align: center;">
-            <h1 style="font-size: 3rem; color: var(--secondary);">+100</h1>
-            <p>Alunos impactados pela metodologia Arte de Aprender</p>
-        </div>
+    <div class="hero-card">
+        <h3 style="color: var(--soft-blue); margin-bottom: 20px;">Foco do Ensino</h3>
+        <ul style="list-style: none; color: var(--text-main);">
+            <li style="margin-bottom: 15px;">🔹 Cálculo I, II e III</li>
+            <li style="margin-bottom: 15px;">🔹 Física Clássica e Moderna</li>
+            <li style="margin-bottom: 15px;">🔹 Preparação para Vestibulares</li>
+        </ul>
     </div>
 </section>
 
 <section id="metodologia">
-    <h2 class="section-title">Metodologia</h2>
+    <h2 class="section-title">Nossa Metodologia</h2>
     <div class="grid-cards">
         <div class="card">
-            <h3>Base Sólida</h3>
-            <p>Não avançamos sem tapar os buracos do passado. Revisamos conceitos básicos para que o novo conteúdo faça sentido.</p>
+            <h3>Clareza</h3>
+            <p>Transformamos conceitos complexos em explicações simples e visuais.</p>
         </div>
         <div class="card">
-            <h3>Didática Criativa</h3>
-            <p>Linguagem simples e exemplos do cotidiano para tornar a física e a matemática algo palpável.</p>
+            <h3>Prática</h3>
+            <p>O aprendizado acontece na ponta do lápis. Exercícios guiados passo a passo.</p>
         </div>
         <div class="card">
-            <h3>Foco no Aluno</h3>
-            <p>Cada aula é preparada exclusivamente para a sua dúvida e para o seu objetivo final.</p>
+            <h3>Consistência</h3>
+            <p>Acompanhamento constante para garantir que a base do conhecimento seja sólida.</p>
         </div>
     </div>
 </section>
 
-<section id="contato">
-    <div class="contact-box">
-        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Vamos evoluir juntos?</h2>
-        <p style="color: var(--text-dim); margin-bottom: 30px;">
-            Estou disponível para aulas individuais ou pequenos grupos. Entre em contato para verificar horários disponíveis.
-        </p>
-        <a href="https://wa.me/55SEUNUMERO" class="btn-primary" style="font-size: 1.1rem; padding: 15px 40px;">
-            Chamar no WhatsApp
-        </a>
+<section id="contato" style="text-align: center;">
+    <div class="hero-card" style="max-width: 800px; margin: 0 auto;">
+        <h2 style="margin-bottom: 20px;">Pronto para elevar seu nível?</h2>
+        <p style="margin-bottom: 30px;">As aulas são personalizadas de acordo com sua necessidade específica.</p>
+        <a href="https://wa.me/55SEUNUMERO" class="btn-cta" style="padding: 20px 50px; font-size: 1.1rem;">Falar com o Professor</a>
     </div>
 </section>
 
 <footer>
-    <p>© 2026 • Arte de Aprender • Design Premium para Educação</p>
+    <p style="opacity: 0.5;">© 2026 Arte de Aprender. Todos os direitos reservados.</p>
 </footer>
 
 </body>
