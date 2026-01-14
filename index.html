@@ -3,160 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arte de Aprender | Design Executivo</title>
+    <title>Arte de Aprender | Aulas Particulares</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CORES FIÉIS À IMAGEM ENVIADA  */
+        /* DEFINIÇÃO DA PALETA DA IMAGEM */
         :root {
-            --color-1: #001B48; /* Azul Marinho  */
-            --color-2: #00457A; /* Azul Real  */
-            --color-3: #008ABE; /* Azul Vivo  */
-            --color-4: #97CADB; /* Azul Pastel  */
-            --color-5: #D6E8EE; /* Azul Gelo  */
-            --transition: all 0.4s ease;
+            --navy: #001B48;    /* Fundo Principal */
+            --royal: #00457A;   /* Gradientes e Detalhes */
+            --blue: #008ABE;    /* Cor de Destaque / Botões */
+            --sky: #97CADB;     /* Bordas e Hover */
+            --ice: #D6E8EE;     /* Texto e Contrastes */
+            --glass: rgba(0, 69, 122, 0.25);
         }
 
         * {
             margin: 0; padding: 0; box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent; /* Melhora toque no mobile */
         }
 
         body {
-            background-color: var(--color-1); /* Fundo baseado na cor 1  */
-            color: var(--color-5);
+            background-color: var(--navy);
+            color: var(--ice);
             line-height: 1.6;
+            overflow-x: hidden; /* Evita scroll horizontal no celular */
         }
 
-        /* HEADER ESTILO PÍLULA (Inspirado no formato dos elementos da foto) */
+        /* NAVEGAÇÃO ADAPTÁVEL */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 5%;
-            margin: 20px 8%;
-            background: rgba(0, 69, 122, 0.2);
-            backdrop-filter: blur(10px);
-            border-radius: 50px; /* Formato de pílula da imagem  */
-            border: 1px solid rgba(151, 202, 219, 0.3);
             position: sticky;
-            top: 20px;
+            top: 0;
             z-index: 1000;
+            background: rgba(0, 27, 72, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(151, 202, 219, 0.2);
         }
 
-        .logo { font-weight: 700; font-size: 1.2rem; color: #fff; }
-        .logo span { color: var(--color-3); }
+        .logo { font-weight: 700; font-size: 1.2rem; }
+        .logo span { color: var(--blue); }
 
-        nav ul { display: flex; gap: 25px; list-style: none; }
-        nav ul li a {
-            color: var(--color-5);
-            text-decoration: none;
-            font-size: 0.9rem;
-            opacity: 0.8;
-            transition: var(--transition);
-        }
-        nav ul li a:hover { opacity: 1; color: var(--color-4); }
-
-        /* HERO SECTION COM CÍRCULOS DE GRADIENTE  */
+        /* HERO SECTION - FOCO MOBILE */
         .hero {
             display: flex;
+            flex-direction: column; /* Coluna no mobile por padrão */
             align-items: center;
-            justify-content: space-between;
-            padding: 100px 10%;
+            text-align: center;
+            padding: 60px 8%;
             min-height: 80vh;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Círculo de gradiente decorativo como na imagem  */
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, var(--color-3), transparent);
-            filter: blur(80px);
-            top: -100px;
-            right: -100px;
-            opacity: 0.3;
-            z-index: -1;
+            gap: 40px;
         }
 
         .hero-text h1 {
-            font-size: 3.5rem;
-            line-height: 1.1;
+            font-size: clamp(2rem, 8vw, 3.5rem); /* Ajuste automático de tamanho */
+            line-height: 1.2;
             margin-bottom: 20px;
-            color: #fff;
         }
 
         .hero-text p {
-            font-size: 1.1rem;
-            color: var(--color-4);
-            max-width: 500px;
+            font-size: 1rem;
+            color: var(--sky);
             margin-bottom: 30px;
+            max-width: 600px;
         }
 
-        /* BOTÃO CÁPSULA (Cor 3 e 2 da imagem)  */
-        .btn-capsule {
-            background: linear-gradient(to right, var(--color-3), var(--color-2));
-            color: white;
-            padding: 15px 40px;
-            border-radius: 50px; /* Formato pílula  */
+        /* BOTÃO ESTILO PÍLULA (Conforme imagem) */
+        .btn-action {
+            background: linear-gradient(to right, var(--blue), var(--royal));
+            color: #fff;
+            padding: 16px 35px;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             display: inline-block;
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: var(--transition);
-        }
-
-        .btn-capsule:hover {
-            transform: scale(1.05);
             box-shadow: 0 10px 20px rgba(0, 138, 190, 0.3);
+            transition: 0.3s;
         }
 
-        /* CARDS ARREDONDADOS  */
-        .features {
+        /* GRID EXPANSIVO */
+        .container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 80px 10%;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 40px 8%;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.02);
+            background: var(--glass);
             border: 1px solid rgba(151, 202, 219, 0.1);
-            padding: 40px;
-            border-radius: 35px; /* Bordas bem arredondadas como a pílula  */
-            transition: var(--transition);
+            padding: 30px;
+            border-radius: 30px; /* Formato arredondado da paleta */
+            text-align: left;
+            transition: 0.3s;
         }
 
-        .card:hover {
-            background: rgba(0, 69, 122, 0.1);
-            border-color: var(--color-3);
+        .card:active { transform: scale(0.98); } /* Feedback de toque no mobile */
+
+        .card h3 { color: var(--sky); margin-bottom: 10px; }
+
+        /* ELEMENTOS VISUAIS (Círculos da Imagem) */
+        .circle-bg {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(var(--blue), var(--navy));
+            border-radius: 50%;
+            filter: blur(50px);
+            position: absolute;
+            z-index: -1;
+            opacity: 0.4;
         }
 
-        .card-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--color-3);
-            border-radius: 50%; /* Círculo da imagem  */
-            margin-bottom: 20px;
+        /* AJUSTES PARA TELAS GRANDES (Desktop) */
+        @media (min-width: 1024px) {
+            .hero {
+                flex-direction: row;
+                text-align: left;
+                padding: 120px 10%;
+            }
+            .hero-text { flex: 1; }
+            .hero-visual { flex: 1; display: flex; justify-content: center; }
         }
 
-        .card h3 { color: var(--color-4); margin-bottom: 15px; }
-
-        /* FOOTER */
         footer {
             text-align: center;
-            padding: 60px;
+            padding: 40px;
             border-top: 1px solid rgba(151, 202, 219, 0.1);
-            color: var(--color-4);
             font-size: 0.8rem;
-        }
-
-        @media (max-width: 768px) {
-            .hero { flex-direction: column; text-align: center; }
-            nav { margin: 10px; padding: 10px 20px; }
-            nav ul { display: none; }
+            color: var(--sky);
         }
     </style>
 </head>
@@ -164,46 +140,48 @@
 
 <nav>
     <div class="logo">Arte de <span>Aprender</span></div>
-    <ul>
-        <li><a href="#">Início</a></li>
-        <li><a href="#">Sobre</a></li>
-        <li><a href="#">Método</a></li>
-    </ul>
-    <a href="#" class="btn-capsule" style="padding: 8px 20px; font-size: 0.8rem;">Contato</a>
+    <a href="https://wa.me/55SEUNUMERO" class="btn-action" style="padding: 10px 20px; font-size: 0.8rem;">WhatsApp</a>
 </nav>
+
+<div class="circle-bg" style="top: 10%; left: -50px;"></div>
 
 <section class="hero">
     <div class="hero-text">
-        <h1>Conhecimento em <span>Alta Definição</span></h1>
-        <p>Aulas particulares de exatas com foco em performance acadêmica e clareza total.</p>
-        <a href="#" class="btn-capsule">Agendar Aula Grátis</a>
+        <h1>Aprenda Exatas de um jeito <span>Novo</span>.</h1>
+        <p>Aulas personalizadas de Matemática e Física. O suporte que você precisa para dominar a matéria, direto no seu celular ou presencial.</p>
+        <a href="#contato" class="btn-action">Ver Planos</a>
     </div>
     
     <div class="hero-visual">
-        <div style="width: 250px; height: 250px; background: linear-gradient(135deg, var(--color-3), var(--color-1)); border-radius: 50%; border: 5px solid var(--color-4); box-shadow: 0 0 50px rgba(0, 138, 190, 0.4);"></div>
+        <div style="width: 150px; height: 150px; background: var(--blue); border-radius: 50%; box-shadow: 0 0 40px var(--blue); border: 4px solid var(--ice);"></div>
     </div>
 </section>
 
-<section class="features">
+<div class="container">
     <div class="card">
-        <div class="card-icon"></div>
-        <h3>Matemática</h3>
-        <p>Do ensino fundamental ao cálculo universitário, sem complicação.</p>
+        <h3>Flexibilidade</h3>
+        <p>Aulas adaptadas à sua rotina e nível de conhecimento.</p>
     </div>
     <div class="card">
-        <div class="card-icon" style="background: var(--color-4);"></div>
-        <h3>Física</h3>
-        <p>Entenda as leis do universo com exemplos práticos e lógica aplicada.</p>
+        <h3>Metodologia</h3>
+        <p>Foco na lógica e na resolução prática de problemas.</p>
     </div>
     <div class="card">
-        <div class="card-icon" style="background: var(--color-2);"></div>
-        <h3>Método Próprio</h3>
-        <p>Desenvolvimento de raciocínio crítico para independência do aluno.</p>
+        <h3>Resultados</h3>
+        <p>Acompanhamento constante do seu progresso acadêmico.</p>
+    </div>
+</div>
+
+<section id="contato" style="text-align: center; padding: 80px 8%;">
+    <div class="card" style="display: inline-block; max-width: 500px;">
+        <h2>Dúvidas?</h2>
+        <p style="margin: 15px 0 25px;">Estou pronto para te ajudar a conquistar suas metas.</p>
+        <a href="https://wa.me/55SEUNUMERO" class="btn-action">Chamar no WhatsApp</a>
     </div>
 </section>
 
 <footer>
-    © 2026 ARTE DE APRENDER • DESIGN INSPIRADO NA PALETA TÉCNICA
+    © 2026 Arte de Aprender • Design Responsivo Mobile-First
 </footer>
 
 </body>
